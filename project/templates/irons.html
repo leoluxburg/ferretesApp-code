@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<div class="jumbotron text-center">
+  <div class="container">
+    <img src="https://i.ibb.co/Y7P5jd4/cropped-chepologo-3-removebg-preview.png" alt="cropped-chepologo-3-removebg-preview" border="0" height="200">
+    <h1>Registro de Ferretes</h1>
+    <hr class="hr-style">
+    <p>Buscar Documento</p>
+    <form class="form-inline" method="GET">
+      <div class="input-group">
+        <input type="search" placeholder= "Nombre o Cedula" class="form-control" name="q" id="q" size="60">
+        <div class="input-group-btn">
+          <button type="submit" class="btn btn-f">Buscar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<br>
+<div class="container">
+  <div class="table-responsive">
+    <table class="table">
+      <thead style="background-color:#009F93;">
+        <tr>
+          <th style='color: white;'>Nombre</th>
+          <th style='color: white;'>Cedula</th>
+          <th style='color: white;'>Fecha de Registro</th>
+          <th style='color: white;'><i class="fas fa-eye"></i></th>
+          <th style='color: white;'><i class="fas fa-edit"></i></th>
+          <th style='color: white;'><i class="far fa-file-alt"></i></th>
+        </tr>
+      </thead>
+      <tbody>
+       {% for iron in irons %}
+       <tr>
+        <td>{{ iron.nombre }}</td>
+        <td>{{ iron.cedula }}</td>
+        <td>{{ iron.fecha_registro.strftime('%m/%d/%Y') }}</td>
+      <td>
+        <a
+        href="{{ url_for('main.show_iron', iron_id=iron.id) }}"
+        class="btn btn-outline-primary"
+        role="button"
+        >
+        Ver
+      </a>
+      <td>
+          <a
+          href="{{ url_for('main.update_iron', iron_id=iron.id) }}"
+          class="btn btn-outline-primary"
+          role="button"
+          >
+          Editar
+        </a>
+      </td>
+    </td>
+    <td>
+      <a
+      href="{{ url_for('main.pdf_iron', iron_id=iron.id) }}"
+      class="btn btn-outline-primary"
+      role="button"
+      >
+      PDF
+    </a>
+  </td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+</div>
+</div>
+{% endblock %}
